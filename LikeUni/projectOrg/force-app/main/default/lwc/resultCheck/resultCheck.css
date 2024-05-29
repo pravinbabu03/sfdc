@@ -1,0 +1,57 @@
+
+
+
+table {
+    background: #FFFFFF;
+    border-radius: 0.25em;
+    border-collapse: collapse;
+    margin: 10px 0px;
+}
+
+th {
+    border-bottom: 1px solid #DDDDDD;
+    color: #333333;
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    text-align: left;
+    border: 1px solid #DDDDDD; /* Add this line */
+}
+
+td {
+    color: #333333;
+    font-weight: 400;
+    padding: 0.65em 1em;
+    border: 1px solid #DDDDDD; /* Add this line */
+}
+
+.disabled td {
+    color: #999999;
+}
+
+tbody tr {
+    transition: background 0.25s ease;
+}
+
+tbody tr:hover {
+    background: #F5F5F5;
+}
+
+.greenSpan{
+    color: rgb(19, 176, 19);
+    font-weight: 700;
+}
+
+.redSpan{
+    color: red;
+    font-weight: 700;
+}
+
+dt{
+    font-weight: 700;
+}
+
+.errorMsg{
+    font-size: large;
+    font-weight: 500;
+}

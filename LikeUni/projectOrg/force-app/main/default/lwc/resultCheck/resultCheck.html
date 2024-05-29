@@ -1,0 +1,133 @@
+<template>
+    <lightning-card title="RESULTS" icon-name="standard:search">
+        <div class="slds-m-around_medium" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input label="Enter Student ID :" value={sid} onchange={sidChange} required
+                        placeholder="LU-XXXXXX"></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input label="Enter DOB :" value={dob} onchange={dobChange} required
+                        placeholder="dd/mm/yyyy"></lightning-input>
+                </div>
+            </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-combobox label="Select semester" value={semVal} options={sems} onchange={semChange}
+                        required></lightning-combobox>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-4">
+
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_success" onclick={getResults}>Get Results</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_destructive" onclick={clear}>Clear</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+            </div>
+        </div>
+        <div>
+
+        </div>
+        <template lwc:if={disp}>
+            <div class="slds-box slds-m-around_medium"
+                style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                <div class="slds-align_absolute-center slds-m-top_medium slds-m-bottom_medium">
+                    <span class="slds-text-color_success ">****Records Found****</span>
+                </div>
+                <div>
+                    <dl class="slds-list_horizontal slds-wrap">
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="First Label">Student ID
+                        </dt>
+                        <dd class="slds-item_detail slds-truncate" title="Description for first label">{studentId}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Student Name
+                        </dt>
+                        <dd class="slds-item_detail slds-truncate" title="Description for second label">{studentName}
+                        </dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Department
+                        </dt>
+                        <dd class="slds-item_detail slds-truncate" title="Description for second label">{studDept}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Semester
+                        </dt>
+                        <dd class="slds-item_detail slds-truncate" title="Description for second label">{semVal}</dd>
+                    </dl>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SUBJECT</th>
+                            <th>CGPA</th>
+                            <th>GRADE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={marksDetails} for:item="md">
+                            <tr key={md.Id}>
+                                <td>{md.Subject_Name__c}</td>
+                                <td>{md.Grade_Points__c}</td>
+                                <td>{md.Grade__c}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                    </div>
+                    <div class="slds-col">
+                        <div class="">
+                            <dl class="slds-list_horizontal slds-wrap">
+                                <dt class="slds-item_label slds-text-color_weak slds-truncate" title="First Label">
+                                    Overall CGPA</dt>
+                                <dd class="slds-item_detail slds-truncate" title="Description for first label">{sumOfCg}
+                                </dd>
+                                <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">
+                                    Overall Grade</dt>
+                                <dd class="slds-item_detail slds-truncate" title="Description for second label"><span
+                                        class={passGrade}>{getGrade}</span></dd>
+                            </dl>
+
+                        </div>
+                    </div>
+                    <div class="slds-col">
+                    </div>
+                </div>
+
+            </div>
+        </template>
+        <template lwc:if={errorDisp}>
+            <div class="slds-box slds-m-around_medium"
+                style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                <div>
+                    <div>
+                        <div>
+                            <p class="slds-text-color_error slds-text-align_center slds-m-around_medium">!!!!No Data
+                                Found!!!!</p>
+                            <p class="slds-text-color_error slds-text-align_center slds-text-heading_large">Based on
+                                details you entered no data avaliable. Please provide with correct details.</p>
+                        </div>
+                        <div class="slds-m-around_large">
+                            Note : Make sure data of birth of format "dd/mm/yyyy".
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template lwc:if={errorDetails}>
+            <div class="slds-box slds-m-around_medium"
+                style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                <div class="errorMsg">
+                    <div class="slds-align_absolute-center">
+                        <p class="slds-text-color_error">Provide all necessary data.</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>
